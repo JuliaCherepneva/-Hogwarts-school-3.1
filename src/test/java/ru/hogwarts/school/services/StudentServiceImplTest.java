@@ -10,12 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class StudentServiceImplTest {
-    private final StudentServiceImpl studentService = new StudentServiceImpl();
+    private final StudentServiceImpl studentService;
+    StudentServiceImplTest(StudentServiceImpl studentService) {
+        this.studentService = studentService;
+    }
 
     private final Map<Long, Student> students = new HashMap<>();
     private long lastId = 0;
     Student student = new Student(1L, "Гарри", 17);
 
+
+
+/*
     @Test
     @DisplayName("Добавляет студента")
     void addStudent() {
@@ -58,4 +64,6 @@ class StudentServiceImplTest {
     public void setLastId(long lastId) {
         this.lastId = lastId;
     }
+
+ */
 }

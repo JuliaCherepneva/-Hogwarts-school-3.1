@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.services.FacultyServiceImpl;
 
 import java.util.Collection;
@@ -19,8 +20,8 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Faculty> getFaculty (@PathVariable long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Faculty> getFaculty (@PathVariable Long id) {
        Faculty faculty = facultyService.findFaculty(id);
        if (faculty == null) {
            return ResponseEntity.notFound().build();
@@ -28,12 +29,12 @@ public class FacultyController {
         return ResponseEntity.ok(faculty);
 
     }
-    @PostMapping
+    @PostMapping("/add")
     public Faculty createFaculty (@RequestBody Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
 
-    @PutMapping
+    @PutMapping("/edit")
     public ResponseEntity <Faculty> editStudent (@RequestBody Faculty faculty) {
        Faculty editFaculty = facultyService.editFaculty(faculty);
        if (editFaculty == null){
@@ -42,19 +43,28 @@ public class FacultyController {
         return ResponseEntity.ok(editFaculty);
     }
 
-    @DeleteMapping ("{id}")
-    public ResponseEntity <Faculty> deleteFaculty (@PathVariable long id) {
+    @DeleteMapping ("/{id}")
+    public ResponseEntity <Faculty> deleteFaculty (@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
 
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color) {
+    @GetMapping ("/filter")
+    public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color,
+                                                             @RequestParam(required = false) String name) {
         if (color != null && !color.isBlank()) {
             return ResponseEntity.ok(facultyService.findByColor(color));
         }
+        if (name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.findByName(name));
+        }
         return ResponseEntity.ok(Collections.emptyList());
+    }
+
+    @GetMapping ("/student/{id}")
+    public  Student getFacultyByStudent (@PathVariable Long id) {
+        return facultyService.findFaculty(id).getStudents();
     }
 
 }

@@ -26,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Student findStudent (long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id);
     }
 
     public Student editStudent (Student student) {
@@ -40,14 +40,16 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByAge(age);
 
    }
-    public Optional <Student> getById(long id) {
-        return studentRepository.findById(id);
-    }
+
 
    public Collection <Student> findByAgeBetween(int min, int max) {
        return studentRepository.findByAgeBetween(min, max);
    }
 
+    public Faculty getById(long id) {
+       Student student = studentRepository.findById(id);
+        return student.getFaculty();
 
+    }
 
 }

@@ -9,6 +9,8 @@ import ru.hogwarts.school.services.FacultyServiceImpl;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -62,8 +64,9 @@ public class FacultyController {
         return ResponseEntity.ok(Collections.emptyList());
     }
 
-    @GetMapping ("/student/{id}")
-    public  Student getFacultyByStudent (@PathVariable Long id) {
+
+    @GetMapping ("/students/{id}")
+    public Set<Student> getFacultyByStudent (@PathVariable Long id) {
         return facultyService.findFaculty(id).getStudents();
     }
 

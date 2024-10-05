@@ -1,5 +1,7 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
@@ -8,12 +10,14 @@ import java.util.Set;
 
 
 @Entity
+@JsonIgnoreProperties (value = {"students"})
 public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String color;
+
 
 
 
@@ -45,6 +49,13 @@ public class Faculty {
         this.color = color;
     }
 
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
     @Override
     public String toString() {
         return "Faculty{" +

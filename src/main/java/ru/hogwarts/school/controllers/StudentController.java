@@ -61,9 +61,9 @@ public class StudentController {
             return ResponseEntity.ok(Collections.emptyList());
     }
 
-    @GetMapping ("/faculty/{id}")
-    public  Faculty getStudentsFaculty (@PathVariable Long id) {
-        return studentService.getById(id).getFaculty();
+    @GetMapping ("/studentsFaculty/{id}")
+    public  Faculty getFaculty (@PathVariable Long id) {
+        return studentService.getById(id);
     }
 
 

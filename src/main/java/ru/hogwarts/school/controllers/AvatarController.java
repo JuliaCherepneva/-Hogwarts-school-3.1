@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
-import ru.hogwarts.school.services.AvatarService;
+import ru.hogwarts.school.services.AvatarServiceImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +21,9 @@ import java.nio.file.Path;
 @RequestMapping("/avatars")
 public class AvatarController {
 
-    private final AvatarService avatarService;
+    private final AvatarServiceImpl avatarService;
 
-    public AvatarController(AvatarService avatarService) {
+    public AvatarController(AvatarServiceImpl avatarService) {
         this.avatarService = avatarService;
     }
 
